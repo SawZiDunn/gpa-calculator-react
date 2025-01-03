@@ -1,0 +1,22 @@
+/* global css */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    align-items: center;
+    min-height: 100vh; /* Center the app vertically */
+    font-family: Arial, sans-serif;
+    background-color: #fefae0;
+    color: #333;
+}
+
+#root {
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+    padding: 2rem;
+}
