@@ -15,7 +15,10 @@ export default function CourseList({ courses, delete_course, calculateGpa }) {
                     <p>{course.name}</p>
                     <p>{course.credit}</p>
                     <p>{course.grade}</p>
-                    <button onClick={() => delete_course(course.id)}>
+                    <button
+                        onClick={() => delete_course(course.id)}
+                        aria-label={`Delete ${course.name}`}
+                    >
                         Delete
                     </button>
                 </div>

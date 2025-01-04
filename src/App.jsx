@@ -35,12 +35,14 @@ function App() {
             <h1>GPA Calculator</h1>
 
             <CourseInput handleAddCourse={handleAddCourse} courses={courses} />
-            {!!courses.length && (
+            {courses.length ? (
                 <CourseList
                     courses={courses}
                     delete_course={handleDeleteCourse}
                     calculateGpa={calculateGpa}
                 />
+            ) : (
+                <p>No courses added yet. Start by adding one!</p>
             )}
         </div>
     );
