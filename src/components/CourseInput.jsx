@@ -15,7 +15,7 @@ export default function CourseInput({ handleAddCourse, courses }) {
 
     const [name, setName] = useState("");
     const [grade, setGrade] = useState("A");
-    const [credit, setCredit] = useState("0");
+    const [credit, setCredit] = useState("1");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +33,7 @@ export default function CourseInput({ handleAddCourse, courses }) {
         handleAddCourse(new_course);
         setName("");
         setGrade("A");
-        setCredit("0");
+        setCredit("1");
     };
 
     return (
