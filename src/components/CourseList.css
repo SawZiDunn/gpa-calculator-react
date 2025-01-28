@@ -1,6 +1,8 @@
 .course-list {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     margin: 10px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -9,36 +11,55 @@
 }
 
 .course-headers {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 10px;
     font-weight: bold;
     font-size: 23px;
     margin-bottom: 10px;
 }
 
+.course-headers > div {
+    flex: 1;
+}
+
 .course-row {
     font-size: 20px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 10px;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
     align-items: center;
     margin-bottom: 10px;
 }
 
+.course-row:hover {
+    background-color: #f0f0f0;
+}
+
+.course-row > div {
+    flex: 1;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .course-row button {
-    background-color: #e74c3c;
-    color: #fff;
+    background: none;
+    align-items: center;
+    color: black;
     border: none;
-    height: 30px;
-    width: 100px;
-    font-size: 18px;
+    margin: 5px 10px;
+    font-size: 20px;
     border-radius: 6px;
     cursor: pointer;
 }
 
 .course-row button:hover {
-    background-color: #d32f2f;
+    color: #d32f2f; /* Darker red */
+    text-decoration: underline;
 }
 
 .total-gpa {
@@ -54,9 +75,17 @@
     font-weight: bold;
 }
 
+.empty-state {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 450px) {
     .course-list {
         max-width: 400px;
+        padding: 10px;
     }
 
     .course-headers h3 {
@@ -65,9 +94,10 @@
 
     .course-row {
         font-size: 15px;
+        margin-bottom: 5px;
     }
     .course-row button {
-        width: 60px;
         font-size: 15px;
+        margin: 5px 5px;
     }
 }

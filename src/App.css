@@ -5,8 +5,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: auto;
     background-color: #ffffff;
-    width: 80%;
-    padding: 20px;
+    width: 900px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,8 @@
 @media only screen and (max-width: 450px) {
     .app-container {
         border-radius: 8px;
-        width: 95%;
+        width: 100%;
+        padding: 10px 5px;
     }
 
     .app-container h1 {

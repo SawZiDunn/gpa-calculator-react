@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { gradeToScore, scoreToGrade } from "../helpers";
 import "./CourseInput.css";
 
-export default function CourseInput({ handleAddCourse, courses }) {
-    const gradeToScore = {
-        A: 4,
-        "B+": 3.5,
-        B: 3,
-        "C+": 2.5,
-        C: 2,
-        "D+": 1.5,
-        D: 1,
-        F: 0.5,
-    };
-
+export default function CourseInput({
+    handleAddCourse,
+    handleEditCourse,
+    courseToEdit,
+    courses,
+}) {
     const [name, setName] = useState("");
     const [grade, setGrade] = useState("A");
     const [credit, setCredit] = useState("1");
+
+    // runs everytime courseToEdit changes
+    useEffect(() => {
+        if (courseToEdit) {
+            setName(courseToEdit.name);
+            setCredit(courseToEdit.credit);
+            setGrade(scoreToGrade(courseToEdit.grade));
+        }
+    }, [courseToEdit]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,13 +28,21 @@ export default function CourseInput({ handleAddCourse, courses }) {
             alert("Course name cannot be empty!");
             return;
         }
+
+        const toEdit = courses.filter(
+            (course) => course.id === courseToEdit?.id
+        );
+
         const new_course = {
-            id: courses.length + 1,
+            id: toEdit.length ? courseToEdit.id : courses.length + 1,
             name,
             credit: parseInt(credit),
-            grade: gradeToScore[grade],
+            grade: gradeToScore(grade),
         };
-        handleAddCourse(new_course);
+
+        toEdit.length
+            ? handleEditCourse(new_course)
+            : handleAddCourse(new_course);
         setName("");
         setGrade("A");
         setCredit("1");
