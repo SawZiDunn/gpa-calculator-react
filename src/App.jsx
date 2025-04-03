@@ -1,11 +1,17 @@
 import CourseInput from "./components/CourseInput";
 import CourseList from "./components/CourseList";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+    // const [courses, setCourses] = useState(() => {
+    //     const fetchedCourses = localStorage.getItem("courses");
+    //     return fetchedCourses ? JSON.parse(fetchedCourses) : [];
+    // });
+
     const [courses, setCourses] = useState([]);
     const [courseToEdit, setCourseToEdit] = useState(null);
+
     // {
     //     id: 1,
     //     name: "",
@@ -30,14 +36,40 @@ function App() {
     };
 
     const handleEditCourse = (editedCourse) => {
-        let temp_courses = [...courses];
-        temp_courses[editedCourse.id - 1] = editedCourse;
-        setCourses(temp_courses);
+        setCourses((prev) =>
+            prev.map((course) =>
+                course.id === editedCourse.id ? editedCourse : course
+            )
+        );
+
+        setCourseToEdit(null);
     };
 
     const handleDeleteCourse = (id) => {
         setCourses((prev) => prev.filter((course) => course.id !== id));
     };
+
+    useEffect(() => {
+        // if no key 'courses' in localStorage, it returns null
+        // parse null results in null, so courses become null instead of []
+
+        const fetchedCourses = localStorage.getItem("courses");
+        // if fetchedCourses is ""
+        if (!fetchedCourses) {
+            setCourses([]);
+            return;
+        }
+
+        const parsed = JSON.parse(fetchedCourses);
+        if (parsed.length) {
+            setCourses(parsed);
+        }
+    }, []);
+
+    // renders everytime courses get a new reference
+    useEffect(() => {
+        localStorage.setItem("courses", JSON.stringify(courses));
+    }, [courses]);
 
     return (
         <div className="app-container">

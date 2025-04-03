@@ -12,12 +12,13 @@ export default function CourseInput({
     const [grade, setGrade] = useState("A");
     const [credit, setCredit] = useState("1");
 
-    // runs everytime courseToEdit changes
+    // renders everytime courseToEdit changes
     useEffect(() => {
         if (courseToEdit) {
-            setName(courseToEdit.name);
-            setCredit(courseToEdit.credit);
-            setGrade(scoreToGrade(courseToEdit.grade));
+            const { name, credit, grade } = courseToEdit;
+            setName(name);
+            setCredit(credit);
+            setGrade(scoreToGrade(grade));
         }
     }, [courseToEdit]);
 
@@ -29,20 +30,19 @@ export default function CourseInput({
             return;
         }
 
-        const toEdit = courses.filter(
-            (course) => course.id === courseToEdit?.id
-        );
+        // checks if the use is adding or editing a new course
+        const toEdit = courses.find((course) => course.id === courseToEdit?.id);
+        // console.log(courses);
+        // console.log(toEdit);
 
         const new_course = {
-            id: toEdit.length ? courseToEdit.id : courses.length + 1,
+            id: toEdit ? courseToEdit.id : courses.length + 1,
             name,
             credit: parseInt(credit),
             grade: gradeToScore(grade),
         };
 
-        toEdit.length
-            ? handleEditCourse(new_course)
-            : handleAddCourse(new_course);
+        toEdit ? handleEditCourse(new_course) : handleAddCourse(new_course);
         setName("");
         setGrade("A");
         setCredit("1");

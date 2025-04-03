@@ -12,6 +12,8 @@ A simple and intuitive GPA calculator built with **React**. This app allows user
 
 -   Delete Courses: Remove unwanted courses from the list.
 
+-   Save courses to Browser's localStorage so that they remain even after refresh.
+
 -   Responsive Design: Works seamlessly on desktop and mobile devices.
 
 ## Installation
